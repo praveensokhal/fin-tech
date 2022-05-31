@@ -1,0 +1,73 @@
+<div class="jumbotron row">
+    <div class="col-4">
+        <table>
+            <tr>
+                <td>
+                    Name :
+                </td>
+                <td>
+                    <%=data[0]?.firstName %>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Email :
+                </td>
+                <td>
+                    <%=data[0]?.email %>
+                </td>
+            </tr>
+
+        </table>
+    </div>
+    <div class="col-4">
+        <% if(data[0].account_no && data[0].account_branch && data[0].total_amount) {%>
+            <table>
+                <tr>
+                    <td>
+                        Account Details :
+                    </td>
+                    <td>
+                        <%=data[0]?.account_no %>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Branch :
+                    </td>
+                    <td>
+                        <%=data[0]?.account_branch %>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>
+                        Total :
+                    </td>
+                    <td>
+                        <%=data[0]?.total_amount %>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>
+                        Transaction Amount :
+                    </td>
+                    <td>
+                        <%=data[0]?.transaction_amount %>
+                    </td>
+                
+                </tr>
+                <tr>
+                    <td>
+                        Type :
+                    </td>
+                    <td>
+                        <%=data[0]?.transaction_type === 1 ? 'Withdraw':'deposit' %>
+                    </td>
+                
+                </tr>
+            </table>
+            <% }%>
+    </div>
+</div>

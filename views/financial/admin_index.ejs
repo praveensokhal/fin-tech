@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head'); %>
+</head>
+
+<body class="container">
+
+    <header>
+        <%- include('../partials/admin_header'); %>
+    </header>
+
+    <main>
+        <% if (messages.error) { %>
+            <p style="color:red">
+                <%- messages.error %>
+            </p>
+            <% } %>
+                <% if (messages.success) { %>
+                    <p style="color:green">
+                        <%- messages.success %>
+                    </p>
+                    <% } %>
+                        <%- include(`../${page_layout.name}`,{data:page_layout.data}); %>
+    </main>
+
+    <footer>
+        <%- include('../partials/footer'); %>
+    </footer>
+
+</body>
+
+</html>

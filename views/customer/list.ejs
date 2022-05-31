@@ -1,0 +1,41 @@
+<div class="mt-5 row">
+    <a href="/user/add" class="btn btn-secondary btn-sm   ml-3">New Customer</a>
+    <a href="/user/list" class="btn btn-info btn-sm  ml-3">Customer List</a>
+</div>
+<div class="row container mt-5">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th width="200px">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% if(data.length){ for(var i=0; i< data.length; i++) {%>
+                <tr>
+                    <th scope="row">
+                        <%= (i+1) %>
+                    </th>
+                    <td>
+                        <%= data[i].firstName %>
+                    </td>
+                    <td>
+                        <%= data[i].email%>
+                    </td>
+                    <td>
+                        <a class="btn btn-info btn-sm edit" href="../user/view/<%=data[i].id%>">View</a>
+                        <a class="btn btn-success btn-sm edit" href="../user/edit/<%=data[i].id%>">Edit</a>
+                        <a class="btn btn-danger btn-sm delete" onclick="return alert('Are You sure?')"
+                            href="../user/delete/<%=data[i].id%>">Delete</a>
+                    </td>
+                </tr>
+                <% } }else{ %>
+                    <tr>
+                        <td colspan="3">No user</td>
+                    </tr>
+                    <% } %>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,44 @@
+
+<div class="row container mt-5">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Account No</th>
+                <th scope="col">Branch Name</th>
+                <th width="200px">Total</th>
+                <th width="200px">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% if(data.length){ for(var i=0; i< data.length; i++) {%>
+                <tr>
+                    <th scope="row">
+                        <%= (i+1) %>
+                    </th>
+                    <td>
+                        <%= data[i].firstName %>
+                    </td>
+                    <td>
+                        <%= data[i].account_branch%>
+                    </td>
+                    <td>
+                        <%= data[i].account_no%>
+                    </td>
+                    <td>
+                       Rs <%= data[i].transaction_amount%>
+                    </td>
+                    <td>
+                        <a class="btn btn-info btn-sm edit" href="../finance/transaction-view/<%=data[i].id%>">View</a>
+                      
+                    </td>
+                </tr>
+                <% } }else{ %>
+                    <tr>
+                        <td colspan="3">No user</td>
+                    </tr>
+                    <% } %>
+        </tbody>
+    </table>
+</div>

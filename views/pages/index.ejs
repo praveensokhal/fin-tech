@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head'); %>
+</head>
+
+<body class="container">
+
+    <header>
+        <%- include('../partials/header'); %>
+    </header>
+
+    <main>
+            <% if (messages.error) { %>
+                <p style="color:red">
+                    <%- messages.error %>
+                </p>
+                <% } %>
+                    <% if (messages.success) { %>
+                        <p style="color:green">
+                            <%- messages.success %>
+                        </p>
+                        <% } %>
+        <div class="jumbotron row">
+            <div class="col-4">
+                <table>
+                    <tr>
+                        <td>
+                            Name :
+                        </td>
+                        <td>
+                            <%=data[0]?.firstName %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Email :
+                        </td>
+                        <td>
+                            <%=data[0]?.email %>
+                        </td>
+                    </tr>
+                
+                </table>
+            </div>
+           <div class="col-4">
+               <% if(data[0].account_no && data[0].account_branch && data[0].total_amount) {%>
+            <table>
+                <tr>
+                    <td>
+                        Account Details :
+                    </td>
+                    <td>
+                        <%=data[0]?.account_no %>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Branch :
+                    </td>
+                    <td>
+                        <%=data[0]?.account_branch %>
+                    </td>
+                    
+                </tr>
+                <tr>
+                    <td>
+                        Total :
+                    </td>
+                    <td>
+                        <%=data[0]?.total_amount %>
+                    </td>
+                
+                </tr>
+            </table>
+            <% }%>
+           </div>
+        </div>
+    </main>
+
+    <footer>
+        <%- include('../partials/footer'); %>
+    </footer>
+
+</body>
+
+</html>
