@@ -59,8 +59,8 @@ router.post('/bank-details', function(req, res, next){
          
         connection.query('select * from bank_details where user_id='+id, function(err, bankdetails) {
             if(bankdetails[0].id){
-                req.flash('error', 'Account no already exist');
-               return res.redirect('/user/profile','error', 'Account no already exist');
+                req.flash('error', 'YOu have an account.');
+               return res.redirect('/user/profile','error', 'YOu have an account.');
             }
           
                     var tran_req = {
@@ -148,11 +148,13 @@ router.post('/financial-request', function(req, res, next){
                                     transaction_account_no:  req.body.transaction_account_no ,
                                     transaction_amount:  req.body.transaction_amount  ,
                                     bank_detail_id:bankdetails[0].id,
+                                    transaction_type:req.body.request,
                                     user_id:id  }
                             connection.query('INSERT INTO transaction_table SET ?', tran_req, function(err, result) {
                              let total_amount_calculated = 0 
-                            
+                            let transaction_Type = 0
                             if(req.body.request==1){
+                                transaction_Type = 1;
                                 total_amount_calculated = parseInt(bankdetails[0].total_amount) - parseInt(req.body.transaction_amount)
                             } else{
                                 total_amount_calculated = Number(bankdetails[0].total_amount) + Number(req.body.transaction_amount)
@@ -161,6 +163,8 @@ router.post('/financial-request', function(req, res, next){
                                   req.flash('error', 'Something Failed');
                                 return res.redirect('/finance/financial-request', 'error','Something Failed')
                             }
+                             console.log(req.body.request,total_amount_calculated)
+                          
                         if (err) {
                             req.flash('error', err)
                             res.render('financial/create-request', {
@@ -172,12 +176,18 @@ router.post('/financial-request', function(req, res, next){
                             bank_detail_id:bankdetails[0].id         
                             })
                         } else {
-                           
-                            var bankAmount = {total_amount:total_amount_calculated,request:req.body.request}   
-                            connection.query('UPDATE bank_details SET ? WHERE user_id ='+id,bankAmount,function(err,result){} );           
-                            req.flash('success', 'Data added successfully!');
+                            var bankAmount = {total_amount:total_amount_calculated}   
+                            connection.query('UPDATE bank_details SET ? WHERE user_id ='+id,bankAmount,function(err1,result){
+                                if(err1){
+                                    
+                                     req.flash('error', err1);
+                                     throw err1
+                                }
+                                   req.flash('success', 'Data added successfully!');
                           return  res.redirect('/finance/financial-request');
-                        }
+                      
+                            } );           
+                           }
                     })
                 }
             }
